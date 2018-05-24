@@ -1,12 +1,14 @@
 # gulp-muli
 gulp 常规配置 ，构建前端自动化工作流 ，可用于多页面
 ## 项目启动
+
 ```
 // 常用命令
 开发环境： npm run dev
 生产环境： npm run build
 
 ## 项目目录
+```
 ```
 ├── README.md         # 项目说明
 ├── config            # gulp路径配置
@@ -36,16 +38,21 @@ gulp 常规配置 ，构建前端自动化工作流 ，可用于多页面
 ├── assets            # 打包到dist中assets文件中
 
 ```
+```
 assets文件夹
 * 一级目录中assets文件夹，可以存放不需要编译的文件内容，比如一些插件，图片，字体文件等
-
+```
 // gulp task
+```
+
 执行压缩： gulp zip
 编译页面： gulp html
 编译脚本： gulp scripts
 编译样式： gulp styles
 压缩图片： gulp images
   ...
+  
 ```
-
+```
 其他看gulpfile.js注释。
+```

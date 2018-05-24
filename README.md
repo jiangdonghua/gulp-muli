@@ -54,5 +54,39 @@ assets文件夹
   
 ```
 ```
-其他看gulpfile.js注释。
-```
+可直接用于移动端 基于750
+精灵图需改对的应插件，单位用rem
+   1.首先修改gulp.spritesmith\node_modules\spritesheet-templates\lib\spritesheet-templates.js
+   
+    ```
+    ['x', 'y', 'offset_x', 'offset_y', 'height', 'width', 'total_height', 'total_width'].forEach(function (key) {
+    if (item[key] !== undefined) {
+      px[key] = item[key]/75 + 'rem';
+    }
+    });
+    ```
+   修改的地方是item[key]/75+'rem';这句，我的是设置了750px宽度，所以这里除以75来转换得到rem值。
+
+   2.修改gulp.spritesmith\node_modules\spritesheet-templates\lib\templates\css.template.handlebars
+    在模板页中加入生成background-size内容
+    {{/block}}
+      {{#block "sprites"}}
+      .cicon {
+          display: inline-block;
+          background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
+      }
+      {{#each sprites}}
+      {{{selector}}} {
+        background-image: url({{{escaped_image}}});
+        background-position: {{px.offset_x}} {{px.offset_y}};
+        width: {{px.width}};
+        height: {{px.height}};
+      }
+      {{/each}}
+    {{/block}}
+    
+     PS：rem单位下在不同设备中可能出现图片中出现了雪碧图中其他图的边边角角，所以这里需要设置图片合成的时候彼此之间有一定的间隙，这个只要是gulpfile中设置下padding即可  不想用精灵图或者pc端直接不用理会这些
+  ```
+   ```
+   其他看gulpfile.js注释。
+   ```
